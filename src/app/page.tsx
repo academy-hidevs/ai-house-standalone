@@ -14,6 +14,7 @@ import WorldMapSection from "@/components/WorldMapSection";
 import ImageCarousel from "@/components/ImageCarousel";
 import WorkshopsFAQ from "@/components/WorkshopsFAQ";
 import Footer from "@/components/Footer";
+import LoadingScreen from "@/components/LoadingScreen";
 
 // Animation variants for mirror transition effect
 const fadeUpVariant = {
@@ -59,6 +60,7 @@ const CountingNumber = ({
 };
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const statsRef = useRef(null);
   const isStatsInView = useInView(statsRef, { once: true, amount: 0.3 });
@@ -105,307 +107,327 @@ export default function Home() {
   ];
 
   return (
-    <Wrapper>
-      {/* Hero Section with Background Image */}
-      <HeroSection>
-        {/* Navbar with transparent background showing hero image */}
-        <Navbar>
-          <NavContainer>
-            <LogoLink href="/">
-              <Image
-                src="/hidevslogo.png"
-                alt="HiDevs Logo"
-                width={40}
-                height={47}
-                priority
-                loading="eager"
-                fetchPriority="high"
-              />
-              <LogoText>HiDevs</LogoText>
-            </LogoLink>
+    <>
+      <AnimatePresence mode="wait">
+        {isLoading && (
+          <LoadingScreen onComplete={() => setIsLoading(false)} />
+        )}
+      </AnimatePresence>
 
-            <NavLinks>
-              <NavLink href="https://www.hidevs.xyz">Features</NavLink>
-              <NavLink href="/">AI House</NavLink>
-              <NavLink href="https://www.hidevs.xyz/aboutus">About Us</NavLink>
-              <NavLink href="https://www.hidevs.xyz/city-lead">City Lead</NavLink>
-              <NavLink href="https://www.hidevs.xyz/lbl">LBL</NavLink>
-            </NavLinks>
+      {!isLoading && (
+        <Wrapper
+          as={motion.div}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <AnimatePresence mode="wait">
+            {isLoading && (
+              <LoadingScreen onComplete={() => setIsLoading(false)} />
+            )}
+          </AnimatePresence>
+          {/* Hero Section with Background Image */}
+          <HeroSection>
+            {/* Navbar with transparent background showing hero image */}
+            <Navbar>
+              <NavContainer>
+                <LogoLink href="/">
+                  <Image
+                    src="/hidevslogo.png"
+                    alt="HiDevs Logo"
+                    width={40}
+                    height={47}
+                    priority
+                    loading="eager"
+                    fetchPriority="high"
+                  />
+                  <LogoText>HiDevs</LogoText>
+                </LogoLink>
 
-            <StartButton href="http://app.hidevs.xyz">Start Learning</StartButton>
+                <NavLinks>
+                  <NavLink href="https://www.hidevs.xyz">Features</NavLink>
+                  <NavLink href="/">AI House</NavLink>
+                  <NavLink href="https://www.hidevs.xyz/aboutus">About Us</NavLink>
+                  <NavLink href="https://www.hidevs.xyz/city-lead">City Lead</NavLink>
+                  <NavLink href="https://www.hidevs.xyz/lbl">LBL</NavLink>
+                </NavLinks>
 
-            <MobileMenuButton onClick={() => setIsMobileMenuOpen(true)}>
-              <Menu size={24} color="#ffffff" />
-            </MobileMenuButton>
-          </NavContainer>
-        </Navbar>
+                <StartButton href="http://app.hidevs.xyz">Start Learning</StartButton>
 
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <MobileMenuOverlay
-              initial={{ opacity: 0, x: "100%" }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            >
-              <CloseButton onClick={() => setIsMobileMenuOpen(false)}>
-                <X size={28} color="#ffffff" />
-              </CloseButton>
-              <MobileNavContent>
-                <MobileNavLink href="https://www.hidevs.xyz" onClick={() => setIsMobileMenuOpen(false)}>Features</MobileNavLink>
-                <MobileNavLink href="/" onClick={() => setIsMobileMenuOpen(false)}>AI House</MobileNavLink>
-                <MobileNavLink href="https://www.hidevs.xyz/aboutus" onClick={() => setIsMobileMenuOpen(false)}>About Us</MobileNavLink>
-                <MobileNavLink href="https://www.hidevs.xyz/city-lead" onClick={() => setIsMobileMenuOpen(false)}>City Lead</MobileNavLink>
-                <MobileNavLink href="https://www.hidevs.xyz/lbl" onClick={() => setIsMobileMenuOpen(false)}>LBL</MobileNavLink>
-                <MobileStartButton href="http://app.hidevs.xyz" onClick={() => setIsMobileMenuOpen(false)}>
-                  Start Learning
-                </MobileStartButton>
-              </MobileNavContent>
-            </MobileMenuOverlay>
-          )}
-        </AnimatePresence>
+                <MobileMenuButton onClick={() => setIsMobileMenuOpen(true)}>
+                  <Menu size={24} color="#ffffff" />
+                </MobileMenuButton>
+              </NavContainer>
+            </Navbar>
 
-        <OverlayWrapper>
-          <MainHeadingWrapper
-            as={motion.div}
-            variants={fadeUpVariant}
-            initial="hidden"
-            animate="visible"
-            custom={0}
+            <AnimatePresence>
+              {isMobileMenuOpen && (
+                <MobileMenuOverlay
+                  initial={{ opacity: 0, x: "100%" }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: "100%" }}
+                  transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                >
+                  <CloseButton onClick={() => setIsMobileMenuOpen(false)}>
+                    <X size={28} color="#ffffff" />
+                  </CloseButton>
+                  <MobileNavContent>
+                    <MobileNavLink href="https://www.hidevs.xyz" onClick={() => setIsMobileMenuOpen(false)}>Features</MobileNavLink>
+                    <MobileNavLink href="/" onClick={() => setIsMobileMenuOpen(false)}>AI House</MobileNavLink>
+                    <MobileNavLink href="https://www.hidevs.xyz/aboutus" onClick={() => setIsMobileMenuOpen(false)}>About Us</MobileNavLink>
+                    <MobileNavLink href="https://www.hidevs.xyz/city-lead" onClick={() => setIsMobileMenuOpen(false)}>City Lead</MobileNavLink>
+                    <MobileNavLink href="https://www.hidevs.xyz/lbl" onClick={() => setIsMobileMenuOpen(false)}>LBL</MobileNavLink>
+                    <MobileStartButton href="http://app.hidevs.xyz" onClick={() => setIsMobileMenuOpen(false)}>
+                      Start Learning
+                    </MobileStartButton>
+                  </MobileNavContent>
+                </MobileMenuOverlay>
+              )}
+            </AnimatePresence>
+
+            <OverlayWrapper>
+              <MainHeadingWrapper
+                as={motion.div}
+                variants={fadeUpVariant}
+                initial="hidden"
+                animate="visible"
+                custom={0}
+              >
+                <motion.div
+                  initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                  style={{
+                    width: "100%",
+                    maxWidth: "800px",
+                    margin: "0 auto",
+                  }}
+                >
+                  <Image
+                    src="/hero-workshop.png"
+                    alt="AI House - Bangalore's AI Innovation Hub"
+                    width={1200}
+                    height={400}
+                    priority
+                    quality={100}
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                      filter: "drop-shadow(0 10px 30px rgba(114, 78, 153, 0.3))",
+                    }}
+                  />
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.1 }}
+                  style={{
+                    marginTop: "0.75rem",
+                    fontSize: "clamp(1rem, 2.5vw, 1.5rem)",
+                    fontWeight: "700",
+                    color: "#724e99",
+                    letterSpacing: "0.2em",
+                    textAlign: "center",
+                  }}
+                >
+                  LEARN | BUILD | LAUNCH
+                </motion.div>
+
+                <Message
+                  initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  transition={{ duration: 0.4, ease: "easeOut", delay: 0.2 }}
+                >
+                  An always-free community home for tech builders.
+                </Message>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  transition={{ duration: 0.45, ease: "easeOut", delay: 0.5 }}
+                  style={{ marginTop: "1rem", marginBottom: "1rem" }}
+                >
+                  <Link href="https://docs.google.com/forms/d/e/1FAIpQLScmGt3e2pM9ltxuTGf_G2__FePkX4HIOI-BvxfnOZBK5WcsrA/viewform" target="_blank" rel="noopener noreferrer">
+                    <MidCTAButton>
+                      Join now
+                    </MidCTAButton>
+                  </Link>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+                  whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  viewport={{ once: true, amount: 0.4 }}
+                  transition={{ duration: 0.4, ease: "easeOut", delay: 0.8 }}
+                  style={{
+                    marginBottom: "2rem",
+                    width: "100%",
+                  }}
+                >
+                  <CardsWrapper ref={statsRef}>
+                    {stats.map((stat, index) => (
+                      <Card
+                        key={index}
+                        style={{
+                          transform: `translate(${cardVariants[index % cardVariants.length].x || 0}px, ${cardVariants[index % cardVariants.length].y || 0}px) scale(${cardVariants[index % cardVariants.length].scale || 1}) rotate(${cardVariants[index % cardVariants.length].rotate || 0}deg)`,
+                          zIndex: cardVariants[index % cardVariants.length].zIndex || 1,
+                        }}
+                      >
+                        <p>
+                          {isStatsInView ? (
+                            <CountingNumber value={stat.value} suffix="+" />
+                          ) : (
+                            `${stat.value}+`
+                          )}
+                        </p>
+                        <p>{stat.label}</p>
+                      </Card>
+                    ))}
+                  </CardsWrapper>
+                </motion.div>
+
+
+              </MainHeadingWrapper>
+            </OverlayWrapper>
+          </HeroSection>
+          {/* AI House Description Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+            style={{
+              width: "100%",
+              maxWidth: "1200px",
+              margin: "4rem auto 2rem",
+              padding: "3rem 1rem",
+              textAlign: "center",
+            }}
           >
-            <motion.div
-              initial={{ opacity: 0, y: 20, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              style={{
-                width: "100%",
-                maxWidth: "800px",
-                margin: "0 auto",
-              }}
-            >
-              <Image
-                src="/hero-workshop.png"
-                alt="AI House - Bangalore's AI Innovation Hub"
-                width={1200}
-                height={400}
-                priority
-                quality={100}
-                style={{
-                  width: "100%",
-                  height: "auto",
-                  filter: "drop-shadow(0 10px 30px rgba(114, 78, 153, 0.3))",
-                }}
-              />
-            </motion.div>
+            <AIHouseTitle>HiDevs AI House — Bangalore</AIHouseTitle>
+            <AIHouseSubtitle>
+              The <Highlight>execution-first</Highlight> AI House for builders who want <Highlight>real outcomes</Highlight>.
+            </AIHouseSubtitle>
+            <AIHouseDescription>
+              HiDevs AI House is Bangalore's dedicated <Highlight>AI execution hub and free</Highlight> for engineers, builders, and early founders who are done with passive learning and want to <Highlight>build, ship, and launch</Highlight> real AI systems.
+            </AIHouseDescription>
+            <AIHouseDescription>
+              Unlike generic communities or co-working spaces, HiDevs AI House is structured around <Highlight>learning → building → launching</Highlight>, with continuous <Highlight>evaluation, feedback, and real-world exposure</Highlight> at every step.
+            </AIHouseDescription>
 
+            {/* Downward Arrow */}
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.1 }}
+              transition={{
+                duration: 1,
+                repeat: Infinity,
+                repeatType: "reverse",
+              }}
               style={{
-                marginTop: "0.75rem",
-                fontSize: "clamp(1rem, 2.5vw, 1.5rem)",
-                fontWeight: "700",
-                color: "#724e99",
-                letterSpacing: "0.2em",
-                textAlign: "center",
+                marginTop: "2rem",
+                fontSize: "2rem",
+                color: "#61116fff",
               }}
             >
-              LEARN | BUILD | LAUNCH
+              ↓
             </motion.div>
+          </motion.div>
 
-            <Message
-              initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ duration: 0.4, ease: "easeOut", delay: 0.2 }}
-            >
-              An always-free community home for tech builders.
-            </Message>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ duration: 0.45, ease: "easeOut", delay: 0.5 }}
-              style={{ marginTop: "1rem", marginBottom: "1rem" }}
+          <OverlayWrapper>
+            <MidCTAWrapper
+              as={motion.div}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
             >
               <Link href="https://docs.google.com/forms/d/e/1FAIpQLScmGt3e2pM9ltxuTGf_G2__FePkX4HIOI-BvxfnOZBK5WcsrA/viewform" target="_blank" rel="noopener noreferrer">
-                <MidCTAButton>
-                  Join now
-                </MidCTAButton>
-              </Link>
-            </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+              </Link>
+            </MidCTAWrapper>
+
+            <HowWeHelpCarousel />
+            <PartneredWith />
+            <LearningPlatformUI />
+            <CoreOfferingsSection />
+            <ImageCarousel />
+            <AIHouseDifferenceSection />
+            <WorldMapSection />
+            <WorkshopsFAQ />
+
+            {/* Final CTA Section */}
+            <CTASection
+              as={motion.div}
+              initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
               whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ duration: 0.4, ease: "easeOut", delay: 0.8 }}
-              style={{
-                marginBottom: "2rem",
-                width: "100%",
-              }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
             >
-              <CardsWrapper ref={statsRef}>
-                {stats.map((stat, index) => (
-                  <Card
-                    key={index}
-                    style={{
-                      transform: `translate(${cardVariants[index % cardVariants.length].x || 0}px, ${cardVariants[index % cardVariants.length].y || 0}px) scale(${cardVariants[index % cardVariants.length].scale || 1}) rotate(${cardVariants[index % cardVariants.length].rotate || 0}deg)`,
-                      zIndex: cardVariants[index % cardVariants.length].zIndex || 1,
-                    }}
+              <CTAContent>
+                <CTATitle>Interested in Partnering with AI House?</CTATitle>
+                <CTADescription>
+                  AI House works with educational institutions to strengthen AI education through expert-led workshops, community engagement, and practical learning experiences.
+                  <br /><br />
+                  We design programs tailored to your institution's objectives, student profiles, and focus areas in artificial intelligence.
+                  <br /><br />
+                  Get in touch to discuss a customized collaboration.
+                  <br /><br />
+                  100% free. No credit card. No catch.
+                </CTADescription>
+                <Link href="https://docs.google.com/forms/d/e/1FAIpQLScmGt3e2pM9ltxuTGf_G2__FePkX4HIOI-BvxfnOZBK5WcsrA/viewform" target="_blank" rel="noopener noreferrer">
+                  <CTAButton
+                    as={motion.button}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                   >
-                    <p>
-                      {isStatsInView ? (
-                        <CountingNumber value={stat.value} suffix="+" />
-                      ) : (
-                        `${stat.value}+`
-                      )}
-                    </p>
-                    <p>{stat.label}</p>
-                  </Card>
-                ))}
-              </CardsWrapper>
-            </motion.div>
+                    Connect with AI House
+                  </CTAButton>
+                </Link>
+              </CTAContent>
+            </CTASection>
 
-
-          </MainHeadingWrapper>
-        </OverlayWrapper>
-      </HeroSection>
-      {/* AI House Description Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-        style={{
-          width: "100%",
-          maxWidth: "1200px",
-          margin: "4rem auto 2rem",
-          padding: "3rem 1rem",
-          textAlign: "center",
-        }}
-      >
-        <AIHouseTitle>HiDevs AI House — Bangalore</AIHouseTitle>
-        <AIHouseSubtitle>
-          The <Highlight>execution-first</Highlight> AI House for builders who want <Highlight>real outcomes</Highlight>.
-        </AIHouseSubtitle>
-        <AIHouseDescription>
-          HiDevs AI House is Bangalore's dedicated <Highlight>AI execution hub and free</Highlight> for engineers, builders, and early founders who are done with passive learning and want to <Highlight>build, ship, and launch</Highlight> real AI systems.
-        </AIHouseDescription>
-        <AIHouseDescription>
-          Unlike generic communities or co-working spaces, HiDevs AI House is structured around <Highlight>learning → building → launching</Highlight>, with continuous <Highlight>evaluation, feedback, and real-world exposure</Highlight> at every step.
-        </AIHouseDescription>
-
-        {/* Downward Arrow */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 1,
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
-          style={{
-            marginTop: "2rem",
-            fontSize: "2rem",
-            color: "#61116fff",
-          }}
-        >
-          ↓
-        </motion.div>
-      </motion.div>
-
-      <OverlayWrapper>
-        <MidCTAWrapper
-          as={motion.div}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-        >
-          <Link href="https://docs.google.com/forms/d/e/1FAIpQLScmGt3e2pM9ltxuTGf_G2__FePkX4HIOI-BvxfnOZBK5WcsrA/viewform" target="_blank" rel="noopener noreferrer">
-
-          </Link>
-        </MidCTAWrapper>
-
-        <HowWeHelpCarousel />
-        <PartneredWith />
-        <LearningPlatformUI />
-        <CoreOfferingsSection />
-        <ImageCarousel />
-        <AIHouseDifferenceSection />
-        <WorldMapSection />
-        <WorkshopsFAQ />
-
-        {/* Final CTA Section */}
-        <CTASection
-          as={motion.div}
-          initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-          <CTAContent>
-            <CTATitle>Interested in Partnering with AI House?</CTATitle>
-            <CTADescription>
-              AI House works with educational institutions to strengthen AI education through expert-led workshops, community engagement, and practical learning experiences.
-              <br /><br />
-              We design programs tailored to your institution's objectives, student profiles, and focus areas in artificial intelligence.
-              <br /><br />
-              Get in touch to discuss a customized collaboration.
-              <br /><br />
-              100% free. No credit card. No catch.
-            </CTADescription>
-            <Link href="https://docs.google.com/forms/d/e/1FAIpQLScmGt3e2pM9ltxuTGf_G2__FePkX4HIOI-BvxfnOZBK5WcsrA/viewform" target="_blank" rel="noopener noreferrer">
-              <CTAButton
-                as={motion.button}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Connect with AI House
-              </CTAButton>
-            </Link>
-          </CTAContent>
-        </CTASection>
-
-        {/* Location Section */}
-        <LocationSection
-          as={motion.div}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-          <LocationContent>
-            <LocationLeft>
-              <LocationTitle>Visit AI House</LocationTitle>
-              <LocationAddress>
-                2nd Floor, Above Titan World<br />
-                HSR Layout, Bengaluru
-              </LocationAddress>
-              <Link href="https://maps.app.goo.gl/QbHBg35QMbjFmBjTA" target="_blank" rel="noopener noreferrer">
-                <LocationButton
-                  as={motion.button}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Get Directions
-                </LocationButton>
-              </Link>
-            </LocationLeft>
-            <LocationRight>
-              <MapIframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.7818676448937!2d77.6515603!3d12.921736800000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae15ee38338501%3A0x507a8085f8da545!2sUnion%20Bank%20of%20India!5e0!3m2!1sen!2sin!4v1766392911442!5m2!1sen!2sin"
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </LocationRight>
-          </LocationContent>
-        </LocationSection>
-      </OverlayWrapper>
-      <Footer />
-    </Wrapper>
+            {/* Location Section */}
+            <LocationSection
+              as={motion.div}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            >
+              <LocationContent>
+                <LocationLeft>
+                  <LocationTitle>Visit AI House</LocationTitle>
+                  <LocationAddress>
+                    2nd Floor, Above Titan World<br />
+                    HSR Layout, Bengaluru
+                  </LocationAddress>
+                  <Link href="https://maps.app.goo.gl/QbHBg35QMbjFmBjTA" target="_blank" rel="noopener noreferrer">
+                    <LocationButton
+                      as={motion.button}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Get Directions
+                    </LocationButton>
+                  </Link>
+                </LocationLeft>
+                <LocationRight>
+                  <MapIframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.7818676448937!2d77.6515603!3d12.921736800000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae15ee38338501%3A0x507a8085f8da545!2sUnion%20Bank%20of%20India!5e0!3m2!1sen!2sin!4v1766392911442!5m2!1sen!2sin"
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
+                </LocationRight>
+              </LocationContent>
+            </LocationSection>
+          </OverlayWrapper>
+          <Footer />
+        </Wrapper>
+      )}
+    </>
   );
 }
 

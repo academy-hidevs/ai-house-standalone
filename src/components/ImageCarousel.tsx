@@ -17,40 +17,35 @@ const ImageCarousel = () => {
     const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
     // Images for Top Row (Mixed)
-    // Images for Top Row (Mixed)
     const topRowImages = [
+        '/workshop/PXL_20250530_121051474.jpeg',
+        '/workshop/WhatsApp Image 2025-02-28 at 10.42.47.jpeg',
+        '/cohort-workshop/collage.jpg',
+        '/workshop/IMG_6004.JPG',
         '/lbl/DSC_0116.JPG',
-        '/lbl/DSC_0117.JPG',
+        '/workshop/DSC_0333.JPG',
         '/lbl/DSC_0118.JPG',
+        '/lbl/DSC_0209.JPG',
         '/ai-house/DSC_0044.jpg',
-        '/lbl/DSC_0123.JPG',
+        '/workshop/DSC_0313.JPG',
         '/lbl/DSC_0125.JPG',
-        '/ai-house/20251219_183535.jpg',
-        '/ai-house/20251219_185847.jpg',
-        '/ai-house/20251219_190451.jpg',
-        '/ai-house/20251219_191055.jpg',
-        '/ai-house/20251219_191527.jpg',
-        '/ai-house/20251219_192623.jpg',
+        '/workshop/20250928_105809.jpg',
+        '/lbl/DSC_0219.JPG',
     ];
 
     // Images for Bottom Row (Mixed, Distinct from Top Row)
     const bottomRowImages = [
+        '/cohort-workshop/neuralnexus.jpeg',
+        '/cohort-workshop/midassoe.jpeg',
         '/ai-house/DSC_0031.jpg',
+        '/cohort-workshop/PXL_20250201_104856988.RAW-01.COVER.jpg',
         '/ai-house/DSC_0042.jpg',
         '/lbl/DSC_0151.JPG',
+        '/cohort-workshop/rvitmcollege.jpeg',
         '/lbl/DSC_0152.JPG',
         '/lbl/DSC_0153.JPG',
-        '/lbl/DSC_0154.JPG',
+        '/cohort-workshop/WhatsApp Image 2025-02-28 at 10.42.55 (1).jpeg',
         '/lbl/DSC_0155.JPG',
-        '/ai-house/20251219_193000.jpg',
-        '/ai-house/20251219_195134.jpg',
-        '/ai-house/DSC_0061.jpg',
-        '/ai-house/DSC_0062.jpg',
-        '/ai-house/IMG_0405.jpg',
-        '/ai-house/IMG_0406.jpg',
-        '/ai-house/IMG_9036.jpg',
-        '/ai-house/IMG_9043.jpg',
-        '/ai-house/IMG_9048.jpg',
     ];
 
     return (
