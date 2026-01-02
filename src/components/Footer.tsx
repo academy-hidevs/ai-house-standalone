@@ -434,17 +434,17 @@ export default function Footer() {
     {
       title: "Explore",
       links: [
-        { title: "Home", href: "/" },
-        { title: "AI House", href: "https://www.aihouse.xyz" },
-        { title: "About Us", href: "/aboutus" },
-        { title: "City Lead", href: "/city-lead" },
+        { title: "Home", href: "https://www.hidevs.xyz" },
+        { title: "AI House", href: "https://www.aihouze.xyz" },
+        { title: "About Us", href: "https://www.hidevs.xyz/aboutus" },
+        { title: "City Lead", href: "https://www.hidevs.xyz/city-lead" },
       ],
     },
     {
       title: "Legal",
       links: [
-        { title: "Terms & Conditions", href: "/terms" },
-        { title: "Refund Policy", href: "/refund-policy" },
+        { title: "Terms & Conditions", href: "https://www.hidevs.xyz/terms" },
+        { title: "Refund Policy", href: "https://www.hidevs.xyz/refund-policy" },
       ],
     },
   ];

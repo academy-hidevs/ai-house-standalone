@@ -17,40 +17,38 @@ const ImageCarousel = () => {
     const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
     // Images for Top Row (Mixed)
-    // Images for Top Row (Mixed)
-    const topRowImages = [
-        '/lbl/DSC_0116.JPG',
-        '/lbl/DSC_0117.JPG',
-        '/lbl/DSC_0118.JPG',
+        const topRowImages = [
+        '/workshop/PXL_20250530_121051474.jpeg',
+        '/workshop/WhatsApp Image 2025-02-28 at 10.42.47.jpeg',
+        '/cohort-workshop/collage.jpg',
+        '/workshop/IMG_6004.JPG',
+        '/workshop/DSC_0333.JPG',
+        '/cohort-workshop/IMG20250523122224_01.jpg',
+        '/lbl/DSC_0209.JPG',
+        '/cohort-workshop/jury.jpeg',
         '/ai-house/DSC_0044.jpg',
-        '/lbl/DSC_0123.JPG',
-        '/lbl/DSC_0125.JPG',
-        '/ai-house/20251219_183535.jpg',
-        '/ai-house/20251219_185847.jpg',
-        '/ai-house/20251219_190451.jpg',
-        '/ai-house/20251219_191055.jpg',
-        '/ai-house/20251219_191527.jpg',
-        '/ai-house/20251219_192623.jpg',
+        '/workshop/IMG20241115143037.png',
+        '/workshop/DSC_0313.JPG',
+        '/workshop/DSC01978.png',
+        '/workshop/IMG_7337.jpeg',
+        '/workshop/20250928_105809.jpg',
+        '/lbl/DSC_0219.JPG',
     ];
 
     // Images for Bottom Row (Mixed, Distinct from Top Row)
     const bottomRowImages = [
+        '/cohort-workshop/neuralnexus.jpeg',
+        '/cohort-workshop/midassoe.jpeg',
         '/ai-house/DSC_0031.jpg',
+        '/cohort-workshop/PXL_20250201_104856988.RAW-01.COVER.jpg',
         '/ai-house/DSC_0042.jpg',
         '/lbl/DSC_0151.JPG',
+        '/cohort-workshop/rvitmcollege.jpeg',
         '/lbl/DSC_0152.JPG',
         '/lbl/DSC_0153.JPG',
-        '/lbl/DSC_0154.JPG',
+        '/cohort-workshop/WhatsApp Image 2025-02-28 at 10.42.55 (1).jpeg',
         '/lbl/DSC_0155.JPG',
-        '/ai-house/20251219_193000.jpg',
-        '/ai-house/20251219_195134.jpg',
-        '/ai-house/DSC_0061.jpg',
-        '/ai-house/DSC_0062.jpg',
-        '/ai-house/IMG_0405.jpg',
-        '/ai-house/IMG_0406.jpg',
-        '/ai-house/IMG_9036.jpg',
-        '/ai-house/IMG_9043.jpg',
-        '/ai-house/IMG_9048.jpg',
+        '/ai-house/IMG_9048.jpg'
     ];
 
     return (
@@ -82,7 +80,7 @@ const ImageCarousel = () => {
                     <motion.div
                         className="flex w-max"
                         animate={{
-                            x: ["-25%", "0%"],
+                            x: ["-50%", "0%"],
                         }}
                         transition={{
                             x: {
@@ -93,7 +91,7 @@ const ImageCarousel = () => {
                             },
                         }}
                     >
-                        {[...topRowImages, ...topRowImages, ...topRowImages, ...topRowImages].map((img, index) => (
+                        {[...topRowImages, ...topRowImages].map((img, index) => (
                             <div
                                 key={`top-${index}`}
                                 className="relative flex-shrink-0 w-[200px] h-[140px] md:w-[300px] md:h-[200px] lg:w-[400px] lg:h-[260px] mx-2 md:mx-3 rounded-xl overflow-hidden group"
@@ -116,7 +114,7 @@ const ImageCarousel = () => {
                     <motion.div
                         className="flex w-max"
                         animate={{
-                            x: ["0%", "-25%"],
+                            x: ["0%", "-50%"],
                         }}
                         transition={{
                             x: {
@@ -127,7 +125,7 @@ const ImageCarousel = () => {
                             },
                         }}
                     >
-                        {[...bottomRowImages, ...bottomRowImages, ...bottomRowImages, ...bottomRowImages].map((img, index) => (
+                        {[...bottomRowImages, ...bottomRowImages].map((img, index) => (
                             <div
                                 key={`bottom-${index}`}
                                 className="relative flex-shrink-0 w-[200px] h-[140px] md:w-[300px] md:h-[200px] lg:w-[400px] lg:h-[260px] mx-2 md:mx-3 rounded-xl overflow-hidden group"

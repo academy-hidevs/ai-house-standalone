@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 // Preload animations early for better performance
 import "@/lib/animations";
+import StyledComponentsRegistry from "@/lib/registry";
 
 const inter = Inter({
     variable: "--font-geist-sans",
@@ -38,7 +39,9 @@ export default function RootLayout({
             <body
                 className={`${inter.variable} antialiased`}
             >
-                {children}
+                <StyledComponentsRegistry>
+                    {children}
+                </StyledComponentsRegistry>
             </body>
         </html>
     );
