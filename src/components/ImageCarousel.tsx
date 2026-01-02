@@ -48,7 +48,10 @@ const ImageCarousel = () => {
         '/lbl/DSC_0153.JPG',
         '/cohort-workshop/WhatsApp Image 2025-02-28 at 10.42.55 (1).jpeg',
         '/lbl/DSC_0155.JPG',
-        '/ai-house/IMG_9048.jpg'
+        '/ai-house/IMG_9048.jpg',
+        '/cohort-workshop/IMG_3802.jpg',
+        '/cohort-workshop/IMG_20241114_144015.jpg',
+        '/lbl/DSC_0158.JPG',
     ];
 
     return (
