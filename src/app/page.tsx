@@ -173,8 +173,17 @@ export default function Home() {
               <LoadingScreen onComplete={() => setIsLoading(false)} />
             )}
           </AnimatePresence>
-          {/* Hero Section with Background Image */}
+          {/* Hero Section with Background Video */}
           <HeroSection>
+            <VideoBackground
+              autoPlay
+              muted
+              loop
+              playsInline
+            >
+              <source src="/hero.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </VideoBackground>
             {/* Navbar with transparent background showing hero image */}
             <Navbar>
               <NavContainer>
@@ -190,7 +199,6 @@ export default function Home() {
                   />
                   <LogoText>HiDevs</LogoText>
                 </LogoLink>
-
                 <NavLinks>
                   <NavLink href="https://www.hidevs.xyz">Features</NavLink>
                   <NavLink href="/">AI House</NavLink>
@@ -198,8 +206,7 @@ export default function Home() {
                   <NavLink href="https://www.hidevs.xyz/city-lead">City Lead</NavLink>
                   <NavLink href="https://www.hidevs.xyz/lbl">LBL</NavLink>
                 </NavLinks>
-
-                <StartButton href="http://app.hidevs.xyz">Start Learning</StartButton>
+                <StartButton href="https://app.hidevs.xyz">Start Learning</StartButton>
 
                 <MobileMenuButton onClick={() => setIsMobileMenuOpen(true)}>
                   <Menu size={24} color="#ffffff" />
@@ -224,7 +231,7 @@ export default function Home() {
                     <MobileNavLink href="https://www.hidevs.xyz/aboutus" onClick={() => setIsMobileMenuOpen(false)}>About Us</MobileNavLink>
                     <MobileNavLink href="https://www.hidevs.xyz/city-lead" onClick={() => setIsMobileMenuOpen(false)}>City Lead</MobileNavLink>
                     <MobileNavLink href="https://www.hidevs.xyz/lbl" onClick={() => setIsMobileMenuOpen(false)}>LBL</MobileNavLink>
-                    <MobileStartButton href="http://app.hidevs.xyz" onClick={() => setIsMobileMenuOpen(false)}>
+                    <MobileStartButton href="https://app.hidevs.xyz" onClick={() => setIsMobileMenuOpen(false)}>
                       Start Learning
                     </MobileStartButton>
                   </MobileNavContent>
@@ -492,11 +499,7 @@ const HeroSection = styled.section`
   position: relative;
   width: 100%;
   min-height: 100vh;
-  background-image: url('/ai-house/IMG_9043.jpg');
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  overflow: hidden;
   
   /* Overlay for better text readability */
   &::before {
@@ -514,20 +517,38 @@ const HeroSection = styled.section`
       rgba(0, 0, 0, 0.2) 70%,
       rgba(0, 0, 0, 0.35) 100%
     );
-    z-index: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* White overlay */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.11);
+    z-index: 1;
     pointer-events: none;
   }
 
   /* Ensure content is above overlay */
   > * {
     position: relative;
-    z-index: 1;
+    z-index: 2;
   }
+`;
 
-  @media (max-width: 768px) {
-    background-attachment: scroll;
-    background-position: center top;
-  }
+const VideoBackground = styled.video`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
 `;
 
 const Navbar = styled.nav`
@@ -569,7 +590,11 @@ const LogoLink = styled(Link)`
   gap: 0.5rem;
   text-decoration: none;
   color: #ffffff;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 2px 4px rgba(107, 107, 107, 0.3);
+  
+  img {
+    filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
+  }
 `;
 
 const LogoText = styled.h3`
